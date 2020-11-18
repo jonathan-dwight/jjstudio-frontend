@@ -6,7 +6,6 @@ import SignupFormContainer from '../session/signup_form_container';
 import './modal.css'
 
 const Modal = ({ modal, closeModal }) => {
-    debugger
     if (!modal) {
         return null;
     }
