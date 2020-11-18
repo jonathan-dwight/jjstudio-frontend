@@ -1,11 +1,18 @@
 import React from 'react';
+import Modal from "./modal/modal"
 import { Route, Switch, Redirect } from 'react-router-dom';
 import HomeContainer from "./home/home_container"
 
 const App = () => {
     return (
-        <>
-            <Route exact path = "/" component={HomeContainer} />
+        <> 
+            <div>
+                <Modal />
+
+                <Switch>
+                    <Route exact path = "/" component={HomeContainer} />
+                </Switch>
+            </div>
         </>
     )
 }

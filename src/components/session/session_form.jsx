@@ -12,6 +12,15 @@ class SessionForm extends React.Component {
             password2: "",
         }
     }
+
+    render() {
+        return (
+            <>
+                <div>Hello World</div>
+            </>
+
+        )
+    }
 }
 
 export default withRouter(SessionForm)
