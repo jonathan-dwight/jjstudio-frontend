@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import "./session.css"
 
 class SessionForm extends React.Component {
     constructor(props) {
@@ -42,19 +43,19 @@ class SessionForm extends React.Component {
     render() {
 
         const firstName = (this.props.formType === 'signup') ? (
-            <label>
+            <label>First Name:
                 <input type="text" value={this.state.firstname}/>
             </label>
         ) : ( null )
 
         const lastName = (this.props.formType === 'signup') ? (
-            <label>
+            <label>Last Name:
                 <input type="text" value={this.state.lastname} />
             </label>
         ) : (null)
 
         const secondPassword = (this.props.formType === 'signup') ? (
-            <label>
+            <label>Confirm Password:
                 <input type="text" value="" />
             </label>
         ) : (null)
@@ -74,6 +75,14 @@ class SessionForm extends React.Component {
                         <label> Email:
                             <input  type="text" onChange={this.handleInput('email')}/>
                         </label>
+
+                        <label> Password:
+                            <input type="text" onChange={this.handleInput('password')} />
+                        </label>
+                        
+                        {secondPassword}
+
+                        {this.props.otherForm}
                     </form>
                 </div>
             </>
