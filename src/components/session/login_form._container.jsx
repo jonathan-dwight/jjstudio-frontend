@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
     let errors = state.errors.session;
 
     return {
-        errors: state.errors.session,
+        errors: errors,
         formType: 'login'
     };
 };

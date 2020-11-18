@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import HomeContainer from "./home/home"
 
 const App = () => {
     return (
         <>
-            <div>Hello World</div>
+            <Route exact path = "/" component={HomeContainer} />
         </>
     )
 }
