@@ -5,6 +5,7 @@ export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const RECEIVE_USER_LOGOUT = "RECEIVE_USER_LOGOUT";
 export const RECEIVE_USER_SIGN_IN = "RECEIVE_USER_SIGN_IN";
+export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS"
 
 // action creators
 export const receiveCurrentUser = currentUser => ({
@@ -25,11 +26,15 @@ export const logoutUser = () => ({
     type: RECEIVE_USER_LOGOUT
 });
 
+export const clearSessionErrors = () => ({
+    type: CLEAR_SESSION_ERRORS,
+})
+
 // thunk action creators
 
 //might change this to go straight to login instead of receiveUserSignIn-- will need to test
 export const signup = user => dispatch => (
-    APIUtil.signup(user).then(() => {
+    SessionAPIUtil.signup(user).then(() => {
         dispatch(receiveUserSignIn())
     }
     ).catch(err => (
@@ -40,10 +45,10 @@ export const signup = user => dispatch => (
 // this is to set session token in local storage
 // but might change with how springboot works
 export const login = user => dispatch => (
-    APIUtil.login(user).then(res => {
+    SessionAPIUtil.login(user).then(res => {
         const { token } = res.data;
         localStorage.setItem('jwtToken', token);
-        APIUtil.setAuthToken(token);
+        SessionAPIUtil.setAuthToken(token);
         const decoded = jwt_decode(token);
         dispatch(receiveCurrentUser(decoded))
     })
@@ -54,6 +59,11 @@ export const login = user => dispatch => (
 
 export const logout = () => dispatch => {
     localStorage.removeItem('jwtToken');
-    APIUtil.setAuthToken(false);
+    SessionAPIUtil.setAuthToken(false);
     dispatch(logoutUser());
 };
+
+
+export const clearErrors = () => (dispatch) => {
+    return dispatch(clearSessionErrors())
+}
