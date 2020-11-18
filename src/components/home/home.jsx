@@ -7,7 +7,6 @@ class Home extends React.Component {
     }
 
     render() {
-        debugger
         const sessionLinks = (
             <nav className="login-signup">
                 <button onClick={() => this.props.openModal('login')}

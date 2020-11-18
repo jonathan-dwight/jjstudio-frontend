@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 // will need this when they have a logged in usuer
 
 const mapDispatchToProps = (dispatch) => {
-    debugger
+
     return ({
         openModal: (modal) => dispatch(openModal(modal)),
         logout: () => dispatch(logout())
