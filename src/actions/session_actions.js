@@ -26,6 +26,8 @@ export const logoutUser = () => ({
 });
 
 // thunk action creators
+
+//might change this to go straight to login instead of receiveUserSignIn-- will need to test
 export const signup = user => dispatch => (
     APIUtil.signup(user).then(() => {
         dispatch(receiveUserSignIn())
