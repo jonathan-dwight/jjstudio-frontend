@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import Home from ".Home";
+import Home from "./home";
 import { logout } from "../../actions/session_actions";
-import { openModal } from '../../actions/modal_actions';
+import { openModal } from '../../actions/modal_action';
 
 const mapStateToProps = (state) => {
     // let sessionId = state.session.id
@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
 // will need this when they have a logged in usuer
 
 const mapDispatchToProps = (dispatch) => {
+    debugger
     return ({
         openModal: (modal) => dispatch(openModal(modal)),
         logout: () => dispatch(logout())
