@@ -11,7 +11,7 @@ export const setAuthToken = (token) => {
 }
 
 export const signup = (userData) => {
-    return axios.post('/') // need to grab this from api route to signup a user
+    return axios.post('http://localhost:8080/v1/users') // need to grab this from api route to signup a user
 }
 
 export const login = (userData) => {
