@@ -1,3 +1,22 @@
+# Set Up
+0. Clone this repository
+```bash
+git clone https://github.com/jonathan-dwight/jjstudio-frontend.git
+```
+
+1. Install the project dependencies
+```bash
+npm install
+```
+
+2. Start the React application
+```bash
+npm start
+```
+
+3. Go to [http://localhost:3000](http://localhost:3000)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
