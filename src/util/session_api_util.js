@@ -10,11 +10,11 @@ export const setAuthToken = (token) => {
     }
 }
 
-export const signup = (userData) => {
-    return axios.post('http://localhost:8080/v1/users') // need to grab this from api route to signup a user
+export const signup = (data) => {
+    return axios.post('http://localhost:8080/v1/users', data);
 }
 
 export const login = (userData) => {
-    return axios.post('/') // need to grab this for a login
+    return axios.post('/http://localhost:8080/v1/auth', userData) // need to grab this for a login
 }
 

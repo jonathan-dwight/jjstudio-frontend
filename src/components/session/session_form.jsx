@@ -1,6 +1,8 @@
-import React from "react";
+import React from "react"; 
 import { withRouter } from "react-router-dom";
 import "./session.css"
+
+const VALID_EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class SessionForm extends React.Component {
     constructor(props) {
@@ -11,6 +13,9 @@ class SessionForm extends React.Component {
             email: "",
             password: "",
             password2: "",
+            emailError: false,
+            passwordError: false,
+            password2Error: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -40,6 +45,28 @@ class SessionForm extends React.Component {
         })
     }
 
+    handleOnBlur(field) {
+        return (e) => {
+            if (e.currentTarget === e.target) {
+                console.log('unfocused self');
+                switch( field) {
+                    case "password":
+                        this.setState({ passwordError: this.state.password.length < 3 })
+                        break;
+                    case "password2":
+                        this.setState({ password2Error: this.state.password != this.state.password2 })
+                        break;
+                    case "email":
+                        this.setState({ emailError: !this.state.email.match(VALID_EMAIL_REGEX)})
+                    default:
+                        // Do nothing
+                        return;
+                }
+            }
+            
+        }
+    }
+
     render() {
         const firstName = (this.props.formType === 'signup') ? (
             <label>First Name:
@@ -61,9 +88,12 @@ class SessionForm extends React.Component {
             <label>Confirm Password:
                 <input type="password" 
                 onChange={this.handleInput('password2')}
-                value={this.state.password2} />
+                onBlur={this.handleOnBlur('password2')}
+                value={this.state.password2} 
+                style={(this.state.password2Error) ? { border: '2px solid red' } : {}}/>
             </label>
         ) : (null)
+
         
         // figure out where to autofocus
 
@@ -78,11 +108,17 @@ class SessionForm extends React.Component {
                         {firstName}
                         {lastName}
                         <label> Email:
-                            <input  type="text" onChange={this.handleInput('email')}/>
+                            <input  type="text" 
+                            onChange={this.handleInput('email')} 
+                            onBlur={this.handleOnBlur('email')}
+                            style={(this.state.emailError) ? { border: '2px solid red' } : {}}/>
                         </label>
 
                         <label> Password:
-                            <input type="password" onChange={this.handleInput('password')} />
+                            <input type="password" 
+                            onChange={this.handleInput('password')} 
+                            onBlur={this.handleOnBlur('password')}
+                            style={(this.state.passwordError) ? { border: '2px solid red' } : {}}/>
                         </label>
                         
                         {secondPassword}
