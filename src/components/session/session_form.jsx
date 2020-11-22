@@ -84,13 +84,33 @@ class SessionForm extends React.Component {
             </label>
         ) : (null)
 
+        const email = (
+            <label> Email:
+                <input type="text" 
+                className={this.state.passwordError ? 'login-form-field-valiation' : ''}
+                onChange={this.handleInput('email')} 
+                onBlur={this.handleOnBlur('email')}
+                />
+            </label>
+        )
+
+        const password = (
+            <label> Password:
+                <input type="password" 
+                className={this.state.passwordError ? 'login-form-field-valiation' : ''}
+                onChange={this.handleInput('password')} 
+                onBlur={this.handleOnBlur('password')}
+                />
+            </label>
+        )
+
         const secondPassword = (this.props.formType === 'signup') ? (
             <label>Confirm Password:
                 <input type="password" 
+                className={this.state.password2Error ? 'login-form-field-valiation' : ''}
                 onChange={this.handleInput('password2')}
                 onBlur={this.handleOnBlur('password2')}
-                value={this.state.password2} 
-                style={(this.state.password2Error) ? { border: '2px solid red' } : {}}/>
+                value={this.state.password2} />
             </label>
         ) : (null)
 
@@ -102,25 +122,13 @@ class SessionForm extends React.Component {
                 <div className="login-form-container">
                     <form className="login-form-box" onSubmit={this.handleSubmit}>
                         <div>
-                            <h1>JJ Studio</h1>
+                            <h1>J J | S T U D I O</h1>
                             <p>Make beats</p>
                         </div>
                         {firstName}
                         {lastName}
-                        <label> Email:
-                            <input  type="text" 
-                            onChange={this.handleInput('email')} 
-                            onBlur={this.handleOnBlur('email')}
-                            style={(this.state.emailError) ? { border: '2px solid red' } : {}}/>
-                        </label>
-
-                        <label> Password:
-                            <input type="password" 
-                            onChange={this.handleInput('password')} 
-                            onBlur={this.handleOnBlur('password')}
-                            style={(this.state.passwordError) ? { border: '2px solid red' } : {}}/>
-                        </label>
-                        
+                        {email}
+                        {password}
                         {secondPassword}
 
                         {this.props.otherForm}
