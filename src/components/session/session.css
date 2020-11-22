@@ -17,3 +17,7 @@
    width: 310px;
    background-color: white;
  }
+
+ .login-form-field-valiation {
+   border: 2px solid red;
+ }
