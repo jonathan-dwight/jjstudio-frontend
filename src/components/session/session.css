@@ -18,6 +18,6 @@
    background-color: white;
  }
 
- .login-form-field-valiation {
+ .form-field-error {
    border: 2px solid red;
  }
