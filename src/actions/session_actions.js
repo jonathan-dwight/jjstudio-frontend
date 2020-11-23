@@ -8,10 +8,12 @@ export const RECEIVE_USER_SIGN_IN = "RECEIVE_USER_SIGN_IN";
 export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS"
 
 // action creators
-export const receiveCurrentUser = currentUser => ({
-    type: RECEIVE_CURRENT_USER,
-    currentUser
-})
+export const receiveCurrentUser = currentUser => {
+    return {
+        type: RECEIVE_CURRENT_USER,
+        currentUser
+    }
+}
 
 export const receiveUserSignIn = () => ({
     type: RECEIVE_USER_SIGN_IN
@@ -44,23 +46,27 @@ export const signup = user => dispatch => (
 
 // this is to set session token in local storage
 // but might change with how springboot works
-export const login = user => dispatch => (
-    SessionAPIUtil.login(user).then(res => {
-        const { token } = res.data;
-        localStorage.setItem('jwtToken', token);
-        SessionAPIUtil.setAuthToken(token);
-        const decoded = jwt_decode(token);
+export const login = user => dispatch => { 
+    return SessionAPIUtil.login(user).then(res => {
+        debugger
+        const { jwt } = res.data;
+        localStorage.setItem('jwtToken', jwt);
+        SessionAPIUtil.setAuthToken(jwt);
+        const decoded = jwt_decode(jwt);
         dispatch(receiveCurrentUser(decoded))
+    }).catch(err => {
+        dispatch(receiveErrors(err.response.data));
     })
-        .catch(err => {
-            dispatch(receiveErrors(err.response.data));
-        })
-)
+
+}
+
+
 
 export const logout = () => dispatch => {
     localStorage.removeItem('jwtToken');
     SessionAPIUtil.setAuthToken(false);
     dispatch(logoutUser());
+    //send json back to have it deleted on the frontend
 };
 
 

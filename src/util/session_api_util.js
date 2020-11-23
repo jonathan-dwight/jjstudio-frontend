@@ -3,6 +3,7 @@ import axios from "axios";
 
 //Will set the authToken if someone is logged in
 export const setAuthToken = (token) => {
+    debugger
     if (token) {
         axios.defaults.headers.common['Authorization'] = token;
     } else {
@@ -15,6 +16,6 @@ export const signup = (data) => {
 }
 
 export const login = (userData) => {
-    return axios.post('/http://localhost:8080/v1/auth', userData) // need to grab this for a login
+    return axios.post('http://localhost:8080/v1/auth', userData) // need to grab this for a login
 }
 
